@@ -15,3 +15,26 @@ const db = mysql.createConnection(
     },
     console.log('Connected to the employees database.')
 );
+
+const promptQuestions = {
+    type: 'list',
+    name: 'action',
+    message: 'What would you like to do?',
+    choices:[
+        'View all employees',
+        'View all employees by department',
+        'View all employees by manager',
+        'Add employee',
+        'Remove employee',
+        'Update employee role',
+        'Update employee manager',
+        'View all roles',
+        'Add role',
+        'Remove role',
+        'View all departments',
+        'Add department',
+        'Remove department',
+        'View the total utilized budget of a department',
+        'Exit'
+    ]
+};
