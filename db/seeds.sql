@@ -1,16 +1,16 @@
 INSERT INTO department (name)
-VALUES ('Sales'),
-       ('Engineering'),
-       ('Finance'),
-       ('Legal'),
-       ('Human Resources');
+VALUES ('Management'),
+       ('Vocals'),
+       ('Guitar'),
+       ('Bass'),
+       ('Drums');
 
 INSERT INTO role (title, salary, department_id)
-VALUES ('Singer', 100000, 1),
-       ('Drummer', 80000, 2),
-       ('Bassist', 70000, 3),
-       ('Guitarist', 90000, 4),
-       ('Manager', 120000, 5);
+VALUES ('Manager', 120000, 1),
+       ('Singer', 100000, 2),
+       ('Guitarist', 90000, 3),
+       ('Bassist', 70000, 4),
+       ('Drummer', 80000, 5),
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES ('Scott', 'Matthews', 5, null),
