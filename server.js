@@ -1,5 +1,4 @@
 // Importing dependencies
-const express = require("express");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 require("dotenv").config();
@@ -32,6 +31,7 @@ const promptQuestions = {
     "Add department",
     "Remove department",
     "View the total utilized budget of a department",
+    "View the total budget of the organization",
     "Exit",
   ],
 };
@@ -80,7 +80,11 @@ const initQuery = () => {
       case "View the total utilized budget of a department":
         viewTotalUtilizedBudget();
         break;
+      case "View the total budget of the organization":
+        viewTotalBudget();
+        break;
       case "Exit":
+        exit();
         db.end();
         break;
     }
@@ -88,7 +92,7 @@ const initQuery = () => {
 };
 const viewAllEmployees = () => {
   db.query(
-    `SELECT employees.id, employees.first_name, employees.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employees manager ON manager.id = employees.manager_id`,
+    `SELECT CONCAT(employees.first_name, ' ', employees.last_name) AS Employees, role.title AS Title, department.name AS Department, role.salary AS Salary, CONCAT(manager.first_name, ' ', manager.last_name) AS Manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employees manager ON manager.id = employees.manager_id`,
     (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -98,7 +102,7 @@ const viewAllEmployees = () => {
 };
 const viewAllEmployeesByDepartment = () => {
   db.query(
-    `SELECT department.name AS department, employees.first_name, employees.last_name FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id ORDER BY department.id`,
+    `SELECT department.name AS Department, CONCAT(employees.first_name, ' ', employees.last_name) AS Employees FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id ORDER BY department.id`,
     (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -108,7 +112,7 @@ const viewAllEmployeesByDepartment = () => {
 };
 const viewAllEmployeesByManager = () => {
   db.query(
-    `SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager, employees.first_name, employees.last_name FROM employees LEFT JOIN employees manager ON manager.id = employees.manager_id ORDER BY manager`,
+    `SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS Manager, CONCAT(employees.first_name, ' ', employees.last_name) AS Employees FROM employees LEFT JOIN employees manager ON manager.id = employees.manager_id ORDER BY manager`,
     (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -276,7 +280,7 @@ const updateEmployeeManager = () => {
   });
 };
 const viewAllRoles = () => {
-  db.query("SELECT * FROM role", (err, res) => {
+  db.query("SELECT title AS Title, salary AS Salary FROM role", (err, res) => {
     if (err) throw err;
     console.table(res);
     initQuery();
@@ -343,7 +347,7 @@ const removeRole = () => {
   });
 };
 const viewAllDepartments = () => {
-  db.query("SELECT * FROM department", (err, res) => {
+  db.query("SELECT * FROM department AS Departments", (err, res) => {
     if (err) throw err;
     console.table(res);
     initQuery();
@@ -393,7 +397,17 @@ const removeDepartment = () => {
 };
 const viewTotalUtilizedBudget = () => {
   db.query(
-    "SELECT department.name AS department, SUM(role.salary) AS utilized_budget FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id GROUP BY department.name ORDER BY utilized_budget DESC",
+    "SELECT department.name AS Department, SUM(role.salary) AS Utilized_budget FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id GROUP BY department.name ORDER BY utilized_budget DESC",
+    (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      initQuery();
+    }
+  );
+};
+const viewTotalBudget = () => {
+  db.query(
+    "SELECT department.name AS department, SUM(role.salary) AS total_budget FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id GROUP BY department.name ORDER BY total_budget DESC",
     (err, res) => {
       if (err) throw err;
       console.table(res);

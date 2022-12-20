@@ -6,32 +6,30 @@ VALUES ('Management'),
        ('Drums');
 
 INSERT INTO role (title, salary, department_id)
-VALUES ('Manager', 120000, 1),
-       ('Singer', 100000, 2),
-       ('Guitarist', 90000, 3),
-       ('Bassist', 70000, 4),
-       ('Drummer', 80000, 5),
+VALUES ('Manager', 500000, 1),
+       ('Singer', 750000, 2),
+       ('Guitarist', 750000, 3),
+       ('Bassist', 700000, 4),
+       ('Drummer', 700000, 5);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ('Scott', 'Matthews', 5, null),
-       ('Freddie', 'Mercury', 1, 1),
-       ('Eddie', 'Van Halen', 4, 1);
-       
--- (1, 'Dave', 'Grohl', 1, 7), 
-       -- (2, 'Chad', 'Smith', 2, 11), 
-       -- (3, 'Till', 'Lindemann', 1, 7),
-       -- (4, 'Travis', 'Barker', 2, 11),
-       -- (5, 'James', 'Hetfield', 4, 10), 
-       -- (6, 'John', 'Deacon', 3, 12), 
-       -- (7, 'Freddie', 'Mercury', 1, 12), 
-       -- (8, 'Jaco', 'Pastorius', 3, 6), 
-       -- (9, 'Brian', 'Johnson', 1, 7), 
-       -- (10, 'Eddie', 'Van Halen', 4, 12), 
-       -- (11, 'Neal', 'Peart', 2, 12),
-       -- (12, 'Scott', 'Matthews', 5, 12), 
-       -- (13, 'Dave', 'Raun', 2, 11), 
-       -- (14, 'Pete', 'McCullough', 3, 6), 
-       -- (15, 'Michael', 'Balzary', 3, 6), 
-       -- (16, 'Scott', 'Klopfenstein', 4, 10); 
+VALUES ('Scott', 'Matthews', 1, null),
+       ('Freddie', 'Mercury', 2, 1), 
+       ('Eddie', 'Van Halen', 3, 1),
+       ('John', 'Deacon', 4, 1),
+       ('Neal', 'Peart', 5, 1),
+       ('Dave', 'Grohl', 2, 2),
+       ('Till', 'Lindemann', 2, 2),
+       ('Brian', 'Johnson', 2, 2),
+       ('Scott', 'Klopfenstein', 3, 3),
+       ('Chris', 'Rest', 3, 3),
+       ('James', 'Hetfield', 3, 3),
+       ('Pete', 'McCullough', 4, 4), 
+       ('Michael', 'Balzary', 4, 4),
+       ('Joe', 'Raposo', 4, 4),
+       ('Travis', 'Barker', 5, 5),
+       ('Dave', 'Raun', 5, 5), 
+       ('Chad', 'Smith', 5, 5);
+ 
 -- TO DO: reorder employees table so managers are first, then employees
 
