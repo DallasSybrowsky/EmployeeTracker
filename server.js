@@ -371,7 +371,7 @@ const addDepartment = () => {
     });
 };
 const removeDepartment = () => {
-  db.query("SELECT * FROM  department", (err, res) => {
+  db.query("SELECT * FROM department", (err, res) => {
     if (err) throw err;
     const departmentChoices = res.map(({ id, name }) => ({
       name: name,
@@ -387,7 +387,8 @@ const removeDepartment = () => {
         },
       ])
       .then((answer) => {
-        db.query("DELETE FROM department WHERE ?", answer, (err) => {
+        console.log(answer);
+        db.query("DELETE FROM department WHERE name = ?", answer.id, (err) => {
           if (err) throw err;
           console.log("Department removed!");
           initQuery();
