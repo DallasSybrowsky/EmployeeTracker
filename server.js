@@ -92,7 +92,7 @@ const initQuery = () => {
 };
 const viewAllEmployees = () => {
   db.query(
-    `SELECT CONCAT(employees.first_name, ' ', employees.last_name) AS Employees, role.title AS Title, department.name AS Department, role.salary AS Salary, CONCAT(manager.first_name, ' ', manager.last_name) AS Manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employees manager ON manager.id = employees.manager_id`,
+    `SELECT employees.id, CONCAT(employees.first_name, ' ', employees.last_name) AS Employee_Name, role.title AS Title, department.name AS Department, role.salary AS Salary, CONCAT(manager.first_name, ' ', manager.last_name) AS Manager FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employees manager ON manager.id = employees.manager_id`,
     (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -279,8 +279,9 @@ const updateEmployeeManager = () => {
     });
   });
 };
+// Still need to get the department name to display from department table
 const viewAllRoles = () => {
-  db.query("SELECT title AS Title, salary AS Salary FROM role", (err, res) => {
+  db.query("SELECT title AS Title, salary AS Salary FROM role LEFT JOIN role ON role.department_id", (err, res) => {
     if (err) throw err;
     console.table(res);
     initQuery();
@@ -365,8 +366,8 @@ const addDepartment = () => {
     .then((answer) => {
       db.query("INSERT INTO department SET ?", answer, (err) => {
         if (err) throw err;
-        console.log("Department added!");
       });
+      console.log("Department added!");
       initQuery();
     });
 };

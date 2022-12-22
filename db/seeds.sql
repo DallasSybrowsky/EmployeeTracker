@@ -30,6 +30,4 @@ VALUES ('Scott', 'Matthews', 1, null),
        ('Travis', 'Barker', 5, 5),
        ('Dave', 'Raun', 5, 5), 
        ('Chad', 'Smith', 5, 5);
- 
--- TO DO: reorder employees table so managers are first, then employees
 
