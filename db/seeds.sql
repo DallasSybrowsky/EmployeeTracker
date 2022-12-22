@@ -3,7 +3,7 @@ VALUES ('Management'),
        ('Vocals'),
        ('Guitar'),
        ('Bass'),
-       ('Drums');
+       ('Rhythm');
 
 INSERT INTO role (title, salary, department_id)
 VALUES ('Manager', 500000, 1),

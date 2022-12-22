@@ -279,9 +279,8 @@ const updateEmployeeManager = () => {
     });
   });
 };
-// Still need to get the department name to display from department table
 const viewAllRoles = () => {
-  db.query("SELECT title AS Title, salary AS Salary FROM role LEFT JOIN role ON role.department_id", (err, res) => {
+  db.query("SELECT role.title AS Title, role.salary AS Salary, department.name AS Department FROM role LEFT JOIN department ON role.department_id = department.id", (err, res) => {
     if (err) throw err;
     console.table(res);
     initQuery();
