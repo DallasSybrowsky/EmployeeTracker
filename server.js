@@ -387,7 +387,6 @@ const removeDepartment = () => {
         },
       ])
       .then((answer) => {
-        console.log(answer);
         db.query("DELETE FROM department WHERE name = ?", answer.id, (err) => {
           if (err) throw err;
           console.log("Department removed!");
